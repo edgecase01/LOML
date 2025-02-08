@@ -7,21 +7,17 @@ class newPaper{
     initial(currentPaper){
 
         currentPaper.addEventListener('touchstart', (e) => {
-            touch = e.touches[0];
-            this.xcord = touch.pageX;
-            this.ycord = touch.pageY;
             this.holdingPaper = true;
             currentPaper.style.zIndex = highestZ;
             ++highestZ;
         });
 
         document.addEventListener('touchmove', (e) => {
-            touch = e.touches[touches.size];
+            if(!this.holdingPaper) return;
+            touch = e.touches[0];
             this.xcord = touch.pageX;
             this.ycord = touch.pageY;
-            while (this.holdingPaper) {
-                currentPaper.style.transform = `translateX(${xcord}px) translateY(${ycord}px)`
-            }
+            currentPaper.style.transform = `translateX(${xcord}px) translateY(${ycord}px)`
         })
 
         window.addEventListener('touchend', () => {
