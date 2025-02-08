@@ -19,7 +19,7 @@ class newPaper{
             touch = e.touches[0];
             this.xcord = touch.pageX;
             this.ycord = touch.pageY;
-            currentPaper.style.transform = `translateX(${xcord}px) translateY(${ycord}px)`;
+            currentPaper.style.transform = `translateX(${this.xcord}px) translateY(${this.ycord}px)`;
         })
 
         window.addEventListener('touchend', () => {
