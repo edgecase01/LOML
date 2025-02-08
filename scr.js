@@ -1,4 +1,35 @@
 let highestZ = 1;
+
+class newPaper{
+    holdingPaper = false;
+    xcord = 0;
+    ycord = 0;
+    initial(currentPaper){
+
+        currentPaper.addEventListener('touchstart', (e) => {
+            touch = e.touches[0];
+            this.xcord = touch.pageX;
+            this.ycord = touch.pageY;
+            this.holdingPaper = true;
+            currentPaper.style.zIndex = highestZ;
+            ++highestZ;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            touch = e.touches[touches.size];
+            this.xcord = touch.pageX;
+            this.ycord = touch.pageY;
+            while (this.holdingPaper) {
+                currentPaper.style.transform = `translateX(${xcord}px) translateY(${ycord}px)`
+            }
+        })
+
+        window.addEventListener('touchend', () => {
+            this.holdingPaper = false;
+        })
+    } 
+}
+
 class Paper {
   holdingPaper = false;
   mouseTouchX = 0;
@@ -63,8 +94,9 @@ class Paper {
     });
   }
 }
+
 const papers = Array.from(document.querySelectorAll('.paper'));
 papers.forEach(paper => {
-  const p = new Paper();
-  p.init(paper);
+  const p = new newPaper();
+  p.initial(newPaper);
 });
